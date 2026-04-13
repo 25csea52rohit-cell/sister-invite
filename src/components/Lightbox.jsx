@@ -37,20 +37,20 @@ const Lightbox = ({ images, currentIndex, isOpen, onClose, onNext, onPrev }) => 
       >
         <button 
           onClick={(e) => { e.stopPropagation(); onClose(); }}
-          className="absolute top-6 right-6 md:top-8 md:right-8 text-gold hover:text-gold-light transition-colors p-2 z-50 cursor-pointer hover-trigger"
+          className="absolute top-[12px] right-[12px] md:top-8 md:right-8 text-gold hover:text-gold-light transition-colors p-2 z-50 cursor-pointer hover-trigger"
           aria-label="Close"
         >
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-[32px] h-[32px]">
             <path d="M18 6L6 18M6 6l12 12" />
           </svg>
         </button>
 
         <button 
           onClick={(e) => { e.stopPropagation(); onPrev(); }}
-          className="absolute left-2 md:left-8 text-gold hover:text-gold-light transition-colors p-4 z-50 cursor-pointer hover-trigger"
+          className="absolute left-[8px] md:left-8 text-gold hover:text-gold-light transition-colors p-2 md:p-4 z-50 cursor-pointer hover-trigger"
           aria-label="Previous"
         >
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="w-[36px] h-[36px] md:w-[40px] md:h-[40px]">
             <path d="M15 18l-6-6 6-6" />
           </svg>
         </button>
@@ -60,27 +60,27 @@ const Lightbox = ({ images, currentIndex, isOpen, onClose, onNext, onPrev }) => 
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
-          className="relative max-w-[90vw] max-h-[90vh] flex flex-col items-center justify-center cursor-default"
+          className="relative max-w-[95vw] md:max-w-[90vw] max-h-[80vh] md:max-h-[90vh] flex flex-col items-center justify-center cursor-default"
           onClick={(e) => e.stopPropagation()}
         >
           <img 
             src={images[currentIndex].url} 
             alt={`Wedding Moment ${currentIndex + 1}`} 
-            className="w-auto h-auto max-w-[90vw] max-h-[85vh] object-contain shadow-2xl border border-gold/20"
+            className="w-auto h-auto max-w-[95vw] md:max-w-[90vw] max-h-[80vh] md:max-h-[85vh] object-contain shadow-2xl border border-gold/20"
           />
         </motion.div>
 
         <button 
           onClick={(e) => { e.stopPropagation(); onNext(); }}
-          className="absolute right-2 md:right-8 text-gold hover:text-gold-light transition-colors p-4 z-50 cursor-pointer hover-trigger"
+          className="absolute right-[8px] md:right-8 text-gold hover:text-gold-light transition-colors p-2 md:p-4 z-50 cursor-pointer hover-trigger"
           aria-label="Next"
         >
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="w-[36px] h-[36px] md:w-[40px] md:h-[40px]">
             <path d="M9 18l6-6-6-6" />
           </svg>
         </button>
 
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 font-body text-gold text-lg tracking-widest font-bold z-50">
+        <div className="absolute bottom-[12px] md:bottom-6 left-1/2 -translate-x-1/2 font-body text-gold tracking-widest font-bold z-50 text-[12px] md:text-lg">
           {currentIndex + 1} / {images.length}
         </div>
       </motion.div>
