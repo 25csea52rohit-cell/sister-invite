@@ -34,7 +34,7 @@ const OpeningScreen = ({ onComplete }) => {
   };
 
   const lotusSvg = (
-    <svg width="80" height="80" viewBox="0 0 100 100" fill="var(--color-gold)">
+    <svg viewBox="0 0 100 100" fill="var(--color-gold)" className="w-[60px] h-[60px] md:w-[80px] md:h-[80px]">
       <path d="M50,50 Q60,30 50,10 Q40,30 50,50" />
       <path d="M50,50 Q70,40 90,50 Q70,60 50,50" />
       <path d="M50,50 Q60,70 50,90 Q40,70 50,50" />
@@ -101,7 +101,7 @@ const OpeningScreen = ({ onComplete }) => {
 
       {/* Center Content Overlay */}
       <div 
-        className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none"
+        className="absolute inset-0 flex flex-col items-center justify-center text-center px-[20px] pointer-events-none"
         style={{
           transition: 'opacity 0.4s ease',
           opacity: isOpening ? 0 : 1
@@ -115,24 +115,33 @@ const OpeningScreen = ({ onComplete }) => {
         </div>
 
         <div 
-          className="tamil-text text-[24px] text-gold mb-2 opacity-0 font-bold drop-shadow-md"
-          style={mounted ? { animation: 'fade-in 1s ease-out 0.5s forwards' } : {}}
+          className="tamil-text text-gold mb-2 opacity-0 font-bold drop-shadow-md"
+          style={{
+             ...mounted ? { animation: 'fade-in 1s ease-out 0.5s forwards' } : {},
+             fontSize: 'clamp(16px, 3vw, 24px)'
+          }}
         >
           ரோஷ்னா & செல்வகுமார்
         </div>
 
         <div 
-          className="font-heading text-[42px] text-cream mb-6 opacity-0 tracking-widest leading-none font-bold drop-shadow-2xl"
-          style={mounted ? { animation: 'fade-in 1s ease-out 0.8s forwards' } : {}}
+          className="font-heading text-cream mb-6 opacity-0 tracking-widest leading-none font-bold drop-shadow-2xl"
+          style={{
+             ...mounted ? { animation: 'fade-in 1s ease-out 0.8s forwards' } : {},
+             fontSize: 'clamp(24px, 5vw, 42px)'
+          }}
         >
           Roshna & Selva Kumar
         </div>
 
         <div 
-          className="font-body text-[14px] text-gold opacity-0 uppercase tracking-widest font-bold"
-          style={mounted ? { animation: 'fade-in 1s ease-out 1.1s forwards' } : {}}
+          className="font-body text-gold opacity-0 uppercase tracking-widest font-bold flex items-center justify-center flex-wrap gap-2"
+          style={{
+             ...mounted ? { animation: 'fade-in 1s ease-out 1.1s forwards' } : {},
+             fontSize: 'clamp(11px, 2vw, 14px)'
+          }}
         >
-          May 18, 2026 <span className="mx-2">|</span> <span className="tamil-text tracking-normal normal-case">வைகாசி 4, 2026</span>
+          May 18, 2026 <span className="hidden md:inline">|</span> <span className="tamil-text tracking-normal normal-case">வைகாசி 4, 2026</span>
         </div>
 
         <div 
@@ -141,8 +150,11 @@ const OpeningScreen = ({ onComplete }) => {
         />
 
         <div 
-          className="font-body text-[12px] text-cream tracking-[0.2em] uppercase font-bold opacity-0"
-          style={mounted ? { animation: 'fade-in 0.5s ease-out 1.5s forwards, subtlePulse 2s ease-in-out 1.5s infinite' } : {}}
+          className="font-body text-cream tracking-[0.2em] uppercase font-bold opacity-0"
+          style={{
+             ...mounted ? { animation: 'fade-in 0.5s ease-out 1.5s forwards, subtlePulse 2s ease-in-out 1.5s infinite' } : {},
+             fontSize: 'clamp(10px, 1.5vw, 12px)'
+          }}
         >
           Touch to Enter / தொட்டு உள்ளே வாருங்கள்
         </div>

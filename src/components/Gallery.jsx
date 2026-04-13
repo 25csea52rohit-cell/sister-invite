@@ -42,6 +42,9 @@ const Gallery = () => {
   const prevImage = () => setSelectedImageIndex((prev) => (prev - 1 + images.length) % images.length);
 
   useEffect(() => {
+    // Only run parallax on desktop
+    if (window.innerWidth < 768) return;
+
     const handleScroll = () => {
       const section = sectionRef.current;
       if (!section) return;
@@ -67,7 +70,7 @@ const Gallery = () => {
   const revealRef = useScrollReveal();
 
   const cornerLotus = (
-    <svg width="40" height="40" viewBox="0 0 100 100" fill="var(--color-gold)">
+    <svg viewBox="0 0 100 100" fill="var(--color-gold)" className="w-[35px] h-[35px] md:w-[40px] md:h-[40px]">
       <path d="M50,50 Q60,30 50,10 Q40,30 50,50" />
       <path d="M50,50 Q70,40 90,50 Q70,60 50,50" />
       <path d="M50,50 Q60,70 50,90 Q40,70 50,50" />
@@ -81,35 +84,38 @@ const Gallery = () => {
       <div className="max-w-7xl mx-auto px-4" ref={revealRef}>
         
         <div className="flex flex-col items-center mb-16 text-center">
-          <span className="tamil-text text-gold text-2xl font-bold block mb-2">எங்கள் திருமண வரவேற்பு</span>
-          <h2 className="font-heading text-[28px] md:text-[48px] text-primary tracking-[0.05em] uppercase font-bold">
+          <span className="tamil-text text-gold text-[16px] md:text-2xl font-bold block mb-2">எங்கள் திருமண வரவேற்பு</span>
+          <h2 
+            className="font-heading text-primary tracking-[0.05em] uppercase font-bold"
+            style={{ fontSize: "clamp(24px, 4vw, 48px)" }}
+          >
             Photographic Memories
           </h2>
         </div>
 
         {/* Invitation Card Centerpiece */}
-        <div className="relative flex justify-center items-center mb-24 min-h-[520px]">
+        <div className="relative flex flex-col items-center mb-12 md:mb-24 min-h-[520px]">
           
-          {/* Left Photo */}
+          {/* Left Photo (Desktop only parallax) */}
           <div 
             ref={leftPhotoRef}
-            className="absolute left-[-20px] md:left-[5%] lg:left-[10%] w-[120px] h-[200px] md:w-[280px] md:h-[420px] z-20 cursor-pointer shadow-[8px_8px_0_#C9A84C] border-[3px] border-gold transition-all duration-300 hover:scale-[1.03]"
+            className="hidden md:block absolute left-[5%] lg:left-[10%] w-[280px] h-[420px] z-20 cursor-pointer shadow-[8px_8px_0_#C9A84C] border-[3px] border-gold transition-all duration-300 hover:scale-[1.03]"
             onClick={() => openLightbox(0)}
           >
             <img src={images[0].url} alt="Memory 1" className="w-full h-full object-cover" />
           </div>
 
-          {/* Right Photo */}
+          {/* Right Photo (Desktop only parallax) */}
           <div 
             ref={rightPhotoRef}
-            className="absolute right-[-20px] md:right-[5%] lg:right-[10%] w-[120px] h-[200px] md:w-[280px] md:h-[420px] z-20 cursor-pointer shadow-[8px_8px_0_#C9A84C] border-[3px] border-gold transition-all duration-300 hover:scale-[1.03]"
+            className="hidden md:block absolute right-[5%] lg:right-[10%] w-[280px] h-[420px] z-20 cursor-pointer shadow-[8px_8px_0_#C9A84C] border-[3px] border-gold transition-all duration-300 hover:scale-[1.03]"
             onClick={() => openLightbox(1)}
           >
             <img src={images[1].url} alt="Memory 2" className="w-full h-full object-cover" />
           </div>
 
           {/* Center Card */}
-          <div className="relative w-full max-w-[380px] min-h-[520px] bg-cream border-2 border-gold rounded-[4px] px-8 py-10 shadow-[0_20px_60px_rgba(0,0,0,0.4)] z-30 flex flex-col items-center justify-center overflow-hidden">
+          <div className="relative w-full max-w-[360px] md:max-w-[380px] min-h-[520px] bg-cream border-2 border-gold rounded-[4px] px-5 py-6 md:px-8 md:py-10 shadow-[0_20px_60px_rgba(0,0,0,0.4)] z-30 flex flex-col items-center justify-center overflow-hidden mx-auto">
             
             {/* SVG Border Frame inside Card */}
             <div className="absolute inset-[10px] border border-gold/60 pointer-events-none">
@@ -124,7 +130,7 @@ const Gallery = () => {
               ref={centerBgRef}
               src={images[2].url} 
               alt="Centerpiece background" 
-              className="absolute top-0 left-1/2 w-auto h-[120%] min-w-[120%] object-cover opacity-[0.08] pointer-events-none"
+              className="absolute top-0 left-1/2 w-auto h-[100%] md:h-[120%] min-w-[100%] md:min-w-[120%] object-cover opacity-[0.08] pointer-events-none"
             />
             <div 
               className="absolute inset-0 cursor-pointer z-10" 
@@ -145,8 +151,8 @@ const Gallery = () => {
               </div>
 
               <div className="my-6">
-                <h3 className="tamil-text text-[18px] text-primary font-bold mb-2">ரோஷ்னா & செல்வகுமார்</h3>
-                <h3 className="font-heading text-[32px] text-dark font-bold leading-none tracking-tight">
+                <h3 className="tamil-text text-[16px] md:text-[18px] text-primary font-bold mb-2">ரோஷ்னா & செல்வகுமார்</h3>
+                <h3 className="font-heading text-[28px] md:text-[32px] text-dark font-bold leading-none tracking-tight">
                   Roshna <br/>&<br/> Selva Kumar
                 </h3>
               </div>
@@ -155,7 +161,7 @@ const Gallery = () => {
 
               <div className="space-y-2 uppercase tracking-widest text-[10px] text-dark/80 font-bold mb-6">
                 <div className="text-gold bg-gold/10 inline-block px-3 py-1 mb-2 rounded border border-gold/20">Wedding Celebration</div>
-                <div className="font-heading text-lg text-primary tracking-normal font-bold">May 18, 2026</div>
+                <div className="font-heading text-[16px] md:text-lg text-primary tracking-normal font-bold">May 18, 2026</div>
                 <div className="tamil-text text-[11px] text-gold/80 tracking-normal normal-case mb-1">வைகாசி 4, 2026</div>
                 <div className="text-dark/80">Alagar Kovil Temple</div>
                 <div className="tamil-text text-[10px] text-dark/60 tracking-normal normal-case">அழகர் கோவில், மதுரை</div>
@@ -163,17 +169,35 @@ const Gallery = () => {
 
               <div className="opacity-60 mb-4 drop-shadow-sm">{cornerLotus}</div>
 
-              <div className="font-body italic text-[13px] text-gold/80 normal-case mb-2">
+              <div className="font-body italic text-[12px] md:text-[13px] text-gold/80 normal-case mb-2">
                 Together with their families
               </div>
             </div>
 
           </div>
+          
+          {/* Mobile Only: Top two photos (since they are hidden from the sides) */}
+          <div className="md:hidden grid grid-cols-2 gap-[8px] mt-4 w-full px-2">
+             <div 
+               className="w-full h-[160px] border-2 border-gold cursor-pointer"
+               onClick={() => openLightbox(0)}
+             >
+               <img src={images[0].url} alt="Memory 1" className="w-full h-full object-cover" />
+             </div>
+             <div 
+               className="w-full h-[160px] border-2 border-gold cursor-pointer"
+               onClick={() => openLightbox(1)}
+             >
+               <img src={images[1].url} alt="Memory 2" className="w-full h-full object-cover" />
+             </div>
+          </div>
+          
         </div>
 
-        {/* Scroll Strip of Remaining Photos */}
-        <div className="overflow-x-auto pb-8 relative z-40" style={{ scrollbarWidth: 'none' }}>
-          <div className="flex sm:flex-row flex-col sm:flex-nowrap gap-4 max-sm:grid max-sm:grid-cols-3 max-sm:gap-2 justify-center sm:justify-start w-full sm:min-w-max px-2">
+        {/* Remaining Photos Grid/Strip */}
+        <div className="md:overflow-x-auto pb-8 relative z-40" style={{ scrollbarWidth: 'none' }}>
+          {/* Mobile uses grid, Desktop uses flex row */}
+          <div className="grid grid-cols-2 md:flex md:flex-row md:flex-nowrap gap-[8px] md:gap-4 justify-center md:justify-start w-full md:min-w-max px-2">
             {stripImages.map((img, index) => (
               <StripImage 
                 key={img.id} 
@@ -205,7 +229,7 @@ const StripImage = ({ src, index, onClick }) => {
   return (
     <div 
       ref={ref}
-      className="flex-shrink-0 w-full sm:w-[200px] h-[120px] sm:h-[260px] cursor-pointer border-2 border-transparent hover:border-gold hover:scale-105 transition-all duration-300 hover-trigger"
+      className="w-full md:w-[200px] h-[180px] md:h-[260px] md:flex-shrink-0 cursor-pointer border-2 border-transparent hover:border-gold hover:scale-105 transition-all duration-300 hover-trigger"
       onClick={onClick}
     >
       <img src={src} alt={`Moment ${index + 1}`} className="w-full h-full object-cover shadow-lg" loading="lazy" />
