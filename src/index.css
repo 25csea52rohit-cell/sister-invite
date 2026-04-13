@@ -1,0 +1,155 @@
+@import "tailwindcss";
+
+@theme {
+  --font-heading: "Cormorant Garamond", serif;
+  --font-body: "Inter", sans-serif;
+  --font-tamil: "Noto Serif Tamil", serif;
+  
+  --color-primary: #8B0000;
+  --color-gold: #C9A84C;
+  --color-turmeric: #E8B84B;
+  --color-cream: #FDF6EC;
+  --color-dark-brown: #1a0a00;
+  --color-dark-near: #0d0500;
+  
+  --animate-fade-in: fade-in 1s ease-out forwards;
+  --animate-bounce-slow: bounce-slow 2s infinite;
+  
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes bounce-slow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+}
+
+:root {
+  scroll-behavior: smooth;
+  --gold: #C9A84C;
+  --gold-light: #E8B84B;
+  --red-deep: #8B0000;
+  --cream: #FDF6EC;
+  --dark: #1a0a00;
+  --darker: #0d0500;
+  --text-cream: #F5E6C8;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--dark);
+  background-color: var(--cream);
+  overflow-x: hidden;
+  position: relative;
+  cursor: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: 0.05em;
+}
+
+.tamil-text {
+  font-family: var(--font-tamil);
+}
+
+/* Layered Background System */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-color: var(--cream);
+  background-image: 
+    radial-gradient(var(--gold) 1.5px, transparent 1.5px);
+  background-size: 30px 30px;
+  opacity: 0.15;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: repeating-linear-gradient(45deg, var(--red-deep) 0%, var(--red-deep) 1px, transparent 1px, transparent 2px);
+  opacity: 0.02;
+  pointer-events: none;
+}
+
+/* Custom Utilities for Masonry Framework */
+.masonry-grid {
+  column-count: 1;
+  column-gap: 1.5rem;
+}
+@media (min-width: 640px) {
+  .masonry-grid { column-count: 2; }
+}
+@media (min-width: 1024px) {
+  .masonry-grid { column-count: 3; }
+}
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1.5rem;
+}
+
+/* Custom Cursor styling */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  background-color: var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background-color 0.2s;
+  mix-blend-mode: difference;
+}
+.custom-cursor.hovering {
+  width: 32px;
+  height: 32px;
+  background-color: rgba(201, 168, 76, 0.8);
+}
+
+/* Flower Falling Animation */
+.flowers-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999;
+  overflow: hidden;
+}
+
+.flower {
+  position: absolute;
+  top: -50px;
+  left: var(--left);
+  font-size: var(--size);
+  animation: flowerFall var(--duration) var(--delay) linear infinite;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 3px rgba(201, 168, 76, 0.4));
+}
+
+@keyframes flowerFall {
+  0% { transform: translateY(-50px) rotate(0deg) translateX(0px); opacity: 0; }
+  10% { opacity: 0.85; }
+  25% { transform: translateY(25vh) rotate(90deg) translateX(30px); }
+  50% { transform: translateY(50vh) rotate(180deg) translateX(-20px); }
+  75% { transform: translateY(75vh) rotate(270deg) translateX(25px); }
+  90% { opacity: 0.85; }
+  100% { transform: translateY(110vh) rotate(360deg) translateX(0px); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  .flower { animation: none; opacity: 0; }
+  .custom-cursor { display: none; }
+  body { cursor: auto; }
+}
